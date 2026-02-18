@@ -1,15 +1,20 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const PROJECT_LINKS = [
-  "ozugursavran.com",
-  "satirarasi.pro",
-  "briefly.ai",
-  "davapusulasi.com"
-];
-
 export const fetchEfeSavranInfo = async (): Promise<string> => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+  // Access process.env inside the function to avoid top-level ReferenceErrors
+  let apiKey = '';
+  try {
+    apiKey = typeof process !== 'undefined' ? process.env.API_KEY || '' : '';
+  } catch (e) {
+    console.warn("Could not access process.env. Using fallback behavior.");
+  }
+  
+  if (!apiKey) {
+    return "Hayri Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren, dijital dönüşüm ve LegalTech alanında yenilikçi projeler yürüten bir avukattır. Özuğur & Savran bünyesindeki pratiğini yapay zeka ve teknoloji odaklı girişimlerle harmanlayarak hukuk dünyasında sürdürülebilir çözümler inşa etmeyi amaçlar.";
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   
   const prompt = `
     Hayri Efe Savran hakkında bir profesyonel biyografi özeti oluştur. 
