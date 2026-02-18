@@ -1,7 +1,8 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Project } from './types';
 import ProjectItem from './components/ProjectItem';
+import { fetchEfeSavranInfo } from './services/geminiService';
 
 const PROJECTS: Project[] = [
   { 
@@ -25,7 +26,7 @@ const PROJECTS: Project[] = [
   }
 ];
 
-const FIXED_BIO = "Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren bir hukukçudur. Özuğur & Savran bünyesindeki avukatlık pratiğini, Satır Arası AI, Briefly, Dava Pusulası AI gibi girişimlerle LegalTech alanına taşıyarak dijital dönüşüm süreçlerinde aktif rol almaktadır. Sorunlara yaklaşımında sadece uyuşmazlık çözmeyi değil, teknolojinin gücüyle sürdürülebilir ve güvenilir sistemler inşa etmeyi hedefler. Klasik detaylara ve estetiğe duyduğu ilgi, analitik bakış açısını çok yönlü bir vizyonla harmanlamasını sağlar. Karmaşık süreçleri yalın ve nitelikli çözümlere dönüştürme yetisi, onun çalışma prensibinin temel taşını oluşturur.";
+const INITIAL_BIO = "Hayri Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren, dijital dönüşüm ve LegalTech alanında yenilikçi projeler yürüten bir avukattır...";
 
 const TurkishMotif = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 100" className={className} fill="none" stroke="currentColor" strokeWidth="0.3">
@@ -37,7 +38,23 @@ const TurkishMotif = ({ className }: { className?: string }) => (
 );
 
 const App: React.FC = () => {
+  const [bio, setBio] = useState<string>(INITIAL_BIO);
+  const [loading, setLoading] = useState(true);
   const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Sancak,+549.+Sok.+32+Çankaya/ANKARA";
+
+  useEffect(() => {
+    const loadBio = async () => {
+      try {
+        const dynamicBio = await fetchEfeSavranInfo();
+        if (dynamicBio) setBio(dynamicBio);
+      } catch (err) {
+        console.error("Dynamic fetch failed", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadBio();
+  }, []);
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-start md:justify-center bg-[#f2f2f2] p-4 sm:p-8 md:p-12 overflow-x-hidden selection:bg-[#1a2a44]/10">
@@ -73,9 +90,9 @@ const App: React.FC = () => {
         </section>
 
         {/* Bio Text */}
-        <section className="w-full mb-16 md:mb-20 px-0 max-w-4xl">
-          <p className="font-garamond text-lg sm:text-xl md:text-2xl leading-relaxed text-[#1a2a44] italic text-justify md:text-center hyphens-auto w-full opacity-90">
-            {FIXED_BIO}
+        <section className="w-full mb-16 md:mb-20 px-0 max-w-4xl min-h-[140px] flex items-center justify-center">
+          <p className={`font-garamond text-lg sm:text-xl md:text-2xl leading-relaxed text-[#1a2a44] italic text-justify md:text-center hyphens-auto w-full transition-opacity duration-1000 ${loading ? 'opacity-30' : 'opacity-90'}`}>
+            {bio}
           </p>
         </section>
 
@@ -108,7 +125,7 @@ const App: React.FC = () => {
           </a>
         </div>
 
-        {/* Decorative Divider with Motif - Lines removed as requested, keeping only the motif for subtle separation */}
+        {/* Decorative Divider with Motif */}
         <div className="flex items-center justify-center mb-8 md:mb-10">
           <TurkishMotif className="w-6 h-6 text-[#1a2a44] opacity-[0.08]" />
         </div>
