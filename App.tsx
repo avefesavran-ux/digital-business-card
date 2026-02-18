@@ -4,92 +4,136 @@ import { Project } from './types';
 import ProjectItem from './components/ProjectItem';
 
 const PROJECTS: Project[] = [
-  { name: 'ozugursavran.com', url: 'ozugursavran.com' },
-  { name: 'satirarasi.pro', url: 'satirarasi.pro' },
-  { name: 'briefly.ai', url: 'briefly.ai' },
-  { name: 'davapusulasi.com', url: 'davapusulasi.com' }
+  { 
+    name: 'Özuğur & Savran Hukuk ve Danışmanlık', 
+    url: 'ozugursavran.com' 
+  },
+  { 
+    name: 'Satır Arası', 
+    url: 'satirarasi.pro', 
+    subtitle: 'Sözleşme Analiz Uzmanı' 
+  },
+  { 
+    name: 'Briefly AI', 
+    url: 'briefly.ai',
+    subtitle: 'Less Explaining. More Lawyering.'
+  },
+  { 
+    name: 'Dava Pusulası', 
+    url: 'davapusulasi.com', 
+    subtitle: 'Yapay Zeka Hukuk Asistanı' 
+  }
 ];
 
 const FIXED_BIO = "Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren bir hukukçudur. Özuğur & Savran bünyesindeki avukatlık pratiğini, Satır Arası AI, Briefly, Dava Pusulası AI gibi girişimlerle LegalTech alanına taşıyarak dijital dönüşüm süreçlerinde aktif rol almaktadır. Sorunlara yaklaşımında sadece uyuşmazlık çözmeyi değil, teknolojinin gücüyle sürdürülebilir ve güvenilir sistemler inşa etmeyi hedefler. Klasik detaylara ve estetiğe duyduğu ilgi, analitik bakış açısını çok yönlü bir vizyonla harmanlamasını sağlar. Karmaşık süreçleri yalın ve nitelikli çözümlere dönüştürme yetisi, onun çalışma prensibinin temel taşını oluşturur.";
 
-const App: React.FC = () => {
-  return (
-    <div className="relative min-h-screen flex items-center justify-center bg-[#f5f5f5] p-4 md:p-12 overflow-x-hidden select-none">
-      {/* Texture Layer */}
-      <div className="paper-texture"></div>
+const TurkishMotif = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} fill="none" stroke="currentColor" strokeWidth="0.3">
+    {/* Minimalist Rumi/Hatayi style curve */}
+    <path d="M50,10 C60,30 90,40 50,90 C10,40 40,30 50,10 Z" />
+    <path d="M50,25 C55,35 70,40 50,65 C30,40 45,35 50,25 Z" opacity="0.5" />
+    <circle cx="50" cy="50" r="2" fill="currentColor" opacity="0.3" />
+  </svg>
+);
 
-      {/* Main Container - Desktop focused but mobile responsive */}
-      <main className="relative z-10 w-full max-w-6xl bg-[#fdfdfd] shadow-[0_30px_80px_rgba(0,0,0,0.04)] border border-white/60 p-8 md:p-24 flex flex-col items-center text-center transition-all duration-1000 transform hover:scale-[1.002]">
+const App: React.FC = () => {
+  const mapsUrl = "https://www.google.com/maps/search/?api=1&query=Sancak,+549.+Sok.+32+Çankaya/ANKARA";
+
+  return (
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-start md:justify-center bg-[#f2f2f2] p-4 sm:p-8 md:p-12 overflow-x-hidden selection:bg-[#1a2a44]/10">
+      
+      {/* Decorative Turkish Motifs - Background Watermarks */}
+      <TurkishMotif className="absolute top-10 left-10 w-64 h-64 text-[#1a2a44] opacity-[0.02] -rotate-12 pointer-events-none" />
+      <TurkishMotif className="absolute bottom-10 right-10 w-80 h-80 text-[#1a2a44] opacity-[0.015] rotate-12 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-[#1a2a44]/[0.02] rounded-full pointer-events-none"></div>
+
+      {/* Main Container - Textured Paper Look */}
+      <main className="relative z-10 w-full max-w-[1400px] bg-[#fcfcfc] shadow-[0_30px_80px_rgba(0,0,0,0.02),inset_0_0_100px_rgba(255,255,255,0.5)] border border-white/80 p-8 sm:p-12 md:p-20 flex flex-col items-center text-center transition-all duration-1000 my-4 md:my-0">
         
-        {/* Cities at the very top */}
-        <div className="mb-12">
-           <span className="font-montserrat text-[10px] md:text-[11px] tracking-[0.6em] uppercase text-[#1a2a44]/40">
+        {/* Top Motif Accent */}
+        <TurkishMotif className="w-12 h-12 text-[#1a2a44] opacity-[0.05] mb-8" />
+
+        {/* Locations at the top */}
+        <div className="mb-10 md:mb-14">
+           <span className="font-montserrat text-[11px] md:text-[13px] tracking-[0.7em] uppercase text-[#1a2a44]/40 font-semibold">
               İstanbul &mdash; Ankara &mdash; Antalya
           </span>
         </div>
 
-        <div className="w-16 h-[1px] bg-[#1a2a44]/10 mb-12"></div>
+        <div className="w-20 h-[0.5px] bg-[#1a2a44]/10 mb-10 md:mb-14"></div>
 
-        {/* Name Header - Title closer to name */}
-        <section className="mb-12">
-          <h1 className="font-cinzel text-3xl md:text-5xl letterpress tracking-[0.25em] mb-1">
+        {/* Name Header */}
+        <section className="mb-10 md:mb-14 relative">
+          <h1 className="font-cinzel text-3xl sm:text-4xl md:text-6xl letterpress tracking-[0.2em] mb-2 font-medium">
             HAYRİ EFE SAVRAN
           </h1>
-          <h2 className="font-garamond italic text-lg md:text-2xl text-[#1a2a44]/60 tracking-[0.3em] font-light">
+          <h2 className="font-garamond italic text-lg sm:text-xl md:text-3xl text-[#1a2a44] tracking-[0.35em] font-light">
             Avukat
           </h2>
         </section>
 
-        {/* Updated Bio Text */}
-        <section className="w-full max-w-3xl mb-16 px-2 md:px-0">
-          <p className="font-garamond text-base md:text-xl leading-relaxed text-[#1a2a44]/70 italic text-justify md:text-center hyphens-auto">
+        {/* Bio Text */}
+        <section className="w-full mb-16 md:mb-20 px-0 max-w-4xl">
+          <p className="font-garamond text-lg sm:text-xl md:text-2xl leading-relaxed text-[#1a2a44] italic text-justify md:text-center hyphens-auto w-full opacity-90">
             {FIXED_BIO}
           </p>
         </section>
 
-        {/* Projects Grid - Redesigned for desktop & mobile */}
-        <section className="w-full mb-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Projects Grid - Narrowed container */}
+        <section className="w-full mb-16 md:mb-20 max-w-6xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {PROJECTS.map((project, idx) => (
               <ProjectItem key={idx} project={project} />
             ))}
           </div>
         </section>
 
-        {/* Social Links side by side */}
-        <div className="flex items-center space-x-12 mb-12">
+        {/* Social Links */}
+        <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-16 md:gap-24 mb-12 md:mb-16">
           <a 
             href="https://www.linkedin.com/in/efesavran" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-montserrat text-[10px] tracking-[0.4em] uppercase text-[#1a2a44]/50 hover:text-[#1a2a44] transition-all border-b border-transparent hover:border-[#1a2a44]/20 pb-1"
+            className="font-garamond text-xl md:text-2xl italic text-[#1a2a44]/80 hover:text-[#1a2a44] transition-all border-b border-[#1a2a44]/10 pb-1"
           >
             LinkedIn
           </a>
           <a 
-            href="https://x.com/efesavran" 
+            href="https://x.com/avefesavran" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="font-montserrat text-[10px] tracking-[0.4em] uppercase text-[#1a2a44]/50 hover:text-[#1a2a44] transition-all border-b border-transparent hover:border-[#1a2a44]/20 pb-1"
+            className="font-garamond text-xl md:text-2xl italic text-[#1a2a44]/80 hover:text-[#1a2a44] transition-all border-b border-[#1a2a44]/10 pb-1"
           >
-            X Account
+            X Hesabı
           </a>
         </div>
 
-        {/* Decorative Line (Bottom) */}
-        <div className="w-16 h-[1px] bg-[#1a2a44]/10 mb-10"></div>
+        {/* Decorative Divider with Motif - Lines removed as requested, keeping only the motif for subtle separation */}
+        <div className="flex items-center justify-center mb-8 md:mb-10">
+          <TurkishMotif className="w-6 h-6 text-[#1a2a44] opacity-[0.08]" />
+        </div>
 
-        {/* Footer info - Address */}
+        {/* Footer */}
         <footer className="flex flex-col items-center">
-            <span className="font-montserrat text-[10px] tracking-[0.15em] text-[#1a2a44]/30 font-light">
-                Sancak, 549. Sok. 32 Çankaya/ANKARA
-            </span>
+            <a 
+              href={mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center hover:opacity-100 transition-all duration-300"
+            >
+              <span className="font-garamond text-lg sm:text-xl md:text-2xl italic text-[#1a2a44]/80 text-center px-4">
+                  Sancak, 549. Sok. 32 Çankaya/ANKARA
+              </span>
+              <span className="font-montserrat text-[9px] tracking-[0.3em] uppercase text-[#1a2a44]/20 group-hover:text-[#1a2a44]/40 mt-2 transition-colors">
+                Haritada Görüntüle
+              </span>
+            </a>
         </footer>
       </main>
 
-      {/* Background Decorative Blurs */}
-      <div className="absolute top-0 right-0 w-[50rem] h-[50rem] bg-[#1a2a44]/[0.02] rounded-full blur-[140px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[60rem] h-[60rem] bg-[#1a2a44]/[0.02] rounded-full blur-[180px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+      {/* Ambient background glows */}
+      <div className="absolute top-0 right-0 w-[40rem] md:w-[60rem] h-[40rem] md:h-[60rem] bg-[#1a2a44]/[0.005] rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[50rem] md:w-[70rem] h-[50rem] md:h-[70rem] bg-[#1a2a44]/[0.005] rounded-full blur-[140px] pointer-events-none"></div>
     </div>
   );
 };
