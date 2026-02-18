@@ -26,11 +26,10 @@ const PROJECTS: Project[] = [
   }
 ];
 
-const INITIAL_BIO = "Hayri Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren, dijital dönüşüm ve LegalTech alanında yenilikçi projeler yürüten bir avukattır...";
+const INITIAL_BIO = "Hayri Efe Savran, geleneksel hukuk formasyonunu modern analitik disiplinlerle birleştiren, dijital dönüşüm ve LegalTech alanında yenilikçi projeler yürüten bir avukattır. Özuğur & Savran bünyesindeki pratiğini yapay zeka ve teknoloji odaklı girişimlerle harmanlayarak hukuk dünyasında sürdürülebilir çözümler inşa etmeyi amaçlar.";
 
 const TurkishMotif = ({ className }: { className?: string }) => (
   <svg viewBox="0 0 100 100" className={className} fill="none" stroke="currentColor" strokeWidth="0.3">
-    {/* Minimalist Rumi/Hatayi style curve */}
     <path d="M50,10 C60,30 90,40 50,90 C10,40 40,30 50,10 Z" />
     <path d="M50,25 C55,35 70,40 50,65 C30,40 45,35 50,25 Z" opacity="0.5" />
     <circle cx="50" cy="50" r="2" fill="currentColor" opacity="0.3" />
@@ -59,13 +58,17 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center justify-start md:justify-center bg-[#f2f2f2] p-4 sm:p-8 md:p-12 overflow-x-hidden selection:bg-[#1a2a44]/10">
       
+      {/* Background Textures - Managed via React for stacking control */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-0" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
+      <div className="fixed inset-0 pointer-events-none opacity-[0.08] z-0" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/felt-paper.png")' }}></div>
+
       {/* Decorative Turkish Motifs - Background Watermarks */}
-      <TurkishMotif className="absolute top-10 left-10 w-64 h-64 text-[#1a2a44] opacity-[0.02] -rotate-12 pointer-events-none" />
-      <TurkishMotif className="absolute bottom-10 right-10 w-80 h-80 text-[#1a2a44] opacity-[0.015] rotate-12 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-[#1a2a44]/[0.02] rounded-full pointer-events-none"></div>
+      <TurkishMotif className="absolute top-10 left-10 w-64 h-64 text-[#1a2a44] opacity-[0.02] -rotate-12 pointer-events-none z-0" />
+      <TurkishMotif className="absolute bottom-10 right-10 w-80 h-80 text-[#1a2a44] opacity-[0.015] rotate-12 pointer-events-none z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-[#1a2a44]/[0.02] rounded-full pointer-events-none z-0"></div>
 
       {/* Main Container - Textured Paper Look */}
-      <main className="relative z-10 w-full max-w-[1400px] bg-[#fcfcfc] shadow-[0_30px_80px_rgba(0,0,0,0.02),inset_0_0_100px_rgba(255,255,255,0.5)] border border-white/80 p-8 sm:p-12 md:p-20 flex flex-col items-center text-center transition-all duration-1000 my-4 md:my-0">
+      <main className="relative z-10 w-full max-w-[1400px] bg-[#fcfcfc] shadow-[0_30px_80px_rgba(0,0,0,0.02),inset_0_0_100px_rgba(255,255,255,0.5)] border border-white/80 p-8 sm:p-12 md:p-20 flex flex-col items-center text-center my-4 md:my-0">
         
         {/* Top Motif Accent */}
         <TurkishMotif className="w-12 h-12 text-[#1a2a44] opacity-[0.05] mb-8" />
@@ -149,8 +152,8 @@ const App: React.FC = () => {
       </main>
 
       {/* Ambient background glows */}
-      <div className="absolute top-0 right-0 w-[40rem] md:w-[60rem] h-[40rem] md:h-[60rem] bg-[#1a2a44]/[0.005] rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[50rem] md:w-[70rem] h-[50rem] md:h-[70rem] bg-[#1a2a44]/[0.005] rounded-full blur-[140px] pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-[40rem] md:w-[60rem] h-[40rem] md:h-[60rem] bg-[#1a2a44]/[0.005] rounded-full blur-[120px] pointer-events-none z-0"></div>
+      <div className="absolute bottom-0 left-0 w-[50rem] md:w-[70rem] h-[50rem] md:h-[70rem] bg-[#1a2a44]/[0.005] rounded-full blur-[140px] pointer-events-none z-0"></div>
     </div>
   );
 };
