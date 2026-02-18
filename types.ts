@@ -2,6 +2,7 @@
 export interface Project {
   name: string;
   url: string;
+  subtitle?: string;
 }
 
 export interface BiographyData {
